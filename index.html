@@ -12,8 +12,17 @@
             background-color: #e0e0e0;
             display: flex;
             justify-content: center;
-            position: relative;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
             overflow: hidden;
+        }
+        #main-content {
+            width: 100%;
+            max-width: 600px;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
         }
         #dirt {
             font-size: 50px;
@@ -106,7 +115,7 @@
     </style>
 </head>
 <body>
-    <div>
+    <div id="main-content">
         <h1>Emoji Clicker Game</h1>
         <div id="dirt">💩</div>
         <h2 id="score">Emoji Collected: 0</h2>
