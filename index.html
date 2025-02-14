@@ -66,12 +66,9 @@
         .skin-option {
             display: block;
             margin: 10px 0;
+            font-size: 50px;
             cursor: pointer;
             user-select: none; /* Prevents text highlighting on click */
-        }
-        .skin-option img {
-            width: 50px;
-            height: 50px;
         }
         .popup {
             position: absolute;
@@ -105,7 +102,7 @@
 <body>
     <div>
         <h1>Dirt Clicker Game</h1>
-        <div id="dirt"><img src="https://i.imgur.com/PoopEmoji.png" alt="Dirt" id="dirt-image"></div>
+        <div id="dirt">💩</div>
         <h2 id="score">Dirt Collected: 0</h2>
         <div id="upgrades">
             <div class="upgrade" id="upgrade1">Buy Shovel (Cost: 10 Dirt)</div>
@@ -140,16 +137,16 @@
 
     <div id="skin-arrow">➡️</div>
     <div id="emoji-skins">
-        <div class="skin-option"><img src="https://i.imgur.com/PoopEmoji.png" alt="Poop"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/PoopEmojiRainbow.png" alt="Rainbow Poop"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/BlackPoop.png" alt="Black Poop"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/WhitePoop.png" alt="White Poop"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/GoldPoop.png" alt="Gold Poop"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/DogEmoji.png" alt="Dog"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/CatEmoji.png" alt="Cat"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/MouseEmoji.png" alt="Mouse"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/HamsterEmoji.png" alt="Hamster"></div>
-        <div class="skin-option"><img src="https://i.imgur.com/RabbitEmoji.png" alt="Rabbit"></div>
+        <div class="skin-option" data-skin="💩">💩</div>
+        <div class="skin-option" data-skin="🌈💩">🌈💩</div>
+        <div class="skin-option" data-skin="⚫💩">⚫💩</div>
+        <div class="skin-option" data-skin="⚪💩">⚪💩</div>
+        <div class="skin-option" data-skin="🏅💩">🏅💩</div>
+        <div class="skin-option" data-skin="🐶">🐶</div>
+        <div class="skin-option" data-skin="🐱">🐱</div>
+        <div class="skin-option" data-skin="🐭">🐭</div>
+        <div class="skin-option" data-skin="🐹">🐹</div>
+        <div class="skin-option" data-skin="🐰">🐰</div>
     </div>
 
     <audio id="clickSound" src="https://www.myinstants.com/media/sounds/fart-01.mp3" preload="auto"></audio>
@@ -163,22 +160,21 @@
         
         const dirtDisplay = document.getElementById('score');
         const dirtButton = document.getElementById('dirt');
-        const dirtImage = document.getElementById('dirt-image');
         const clickSound = document.getElementById('clickSound');
         const skinArrow = document.getElementById('skin-arrow');
         const emojiSkins = document.getElementById('emoji-skins');
 
         const skins = [
-            'https://i.imgur.com/PoopEmoji.png',
-            'https://i.imgur.com/PoopEmojiRainbow.png',
-            'https://i.imgur.com/BlackPoop.png',
-            'https://i.imgur.com/WhitePoop.png',
-            'https://i.imgur.com/GoldPoop.png',
-            'https://i.imgur.com/DogEmoji.png',
-            'https://i.imgur.com/CatEmoji.png',
-            'https://i.imgur.com/MouseEmoji.png',
-            'https://i.imgur.com/HamsterEmoji.png',
-            'https://i.imgur.com/RabbitEmoji.png'
+            '💩',
+            '🌈💩',
+            '⚫💩',
+            '⚪💩',
+            '🏅💩',
+            '🐶',
+            '🐱',
+            '🐭',
+            '🐹',
+            '🐰'
         ];
         let currentSkinIndex = 0;
 
@@ -190,7 +186,7 @@
                 dirtPerClick = savedData.dirtPerClick;
                 autoClickerActive = savedData.autoClickerActive;
                 currentSkinIndex = savedData.currentSkinIndex || 0;
-                dirtImage.src = skins[currentSkinIndex];
+                dirtButton.innerText = skins[currentSkinIndex];
                 if (autoClickerActive) {
                     activateAutoClicker();
                 }
@@ -236,13 +232,10 @@
         skins.forEach((skin, index) => {
             const skinOption = document.createElement('div');
             skinOption.classList.add('skin-option');
-            const img = document.createElement('img');
-            img.src = skin;
-            img.alt = `Skin ${index + 1}`;
-            skinOption.appendChild(img);
+            skinOption.innerText = skin;
             skinOption.addEventListener('click', () => {
                 currentSkinIndex = index;
-                dirtImage.src = skins[currentSkinIndex];
+                dirtButton.innerText = skins[currentSkinIndex];
                 saveGame();
                 emojiSkins.style.left = '-200px'; // Hide the skin selection GUI after selection
             });
