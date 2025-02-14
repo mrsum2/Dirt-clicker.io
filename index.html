@@ -49,7 +49,7 @@
             user-select: none; /* Prevents text highlighting on click */
             z-index: 1000;
             font-size: 30px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, left 0.3s;
         }
         #emoji-skins {
             position: fixed;
@@ -225,9 +225,11 @@
         skinArrow.addEventListener('click', () => {
             if (emojiSkins.style.left === '0px') {
                 emojiSkins.style.left = '-200px';
+                skinArrow.style.left = '10px';
                 skinArrow.style.transform = 'translateY(-50%)';
             } else {
                 emojiSkins.style.left = '0px';
+                skinArrow.style.left = '210px';
                 skinArrow.style.transform = 'translateY(-50%) rotate(180deg)';
             }
         });
@@ -241,6 +243,7 @@
                 dirtButton.innerText = skins[currentSkinIndex];
                 saveGame();
                 emojiSkins.style.left = '-200px'; // Hide the skin selection GUI after selection
+                skinArrow.style.left = '10px';
                 skinArrow.style.transform = 'translateY(-50%)'; // Reset the arrow direction
             });
             emojiSkins.appendChild(skinOption);
