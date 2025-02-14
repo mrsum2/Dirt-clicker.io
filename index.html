@@ -144,15 +144,15 @@
     <div id="skin-arrow">➡️</div>
     <div id="emoji-skins">
         <div class="skin-option" data-skin="💩">💩</div>
-        <div class="skin-option locked" data-skin="🌈💩" data-unlock="1000">🌈💩 (1000 Emoji)</div>
-        <div class="skin-option locked" data-skin="⚫💩" data-unlock="10000">⚫💩 (10000 Emoji)</div>
-        <div class="skin-option locked" data-skin="⚪💩" data-unlock="100000">⚪💩 (100000 Emoji)</div>
-        <div class="skin-option locked" data-skin="🏅💩" data-unlock="1000000">🏅💩 (1000000 Emoji)</div>
-        <div class="skin-option locked" data-skin="🐶" data-unlock="10000000">🐶 (10000000 Emoji)</div>
-        <div class="skin-option locked" data-skin="🐱" data-unlock="100000000">🐱 (100000000 Emoji)</div>
-        <div class="skin-option locked" data-skin="🐭" data-unlock="1000000000">🐭 (1000000000 Emoji)</div>
-        <div class="skin-option locked" data-skin="🐹" data-unlock="10000000000">🐹 (10000000000 Emoji)</div>
-        <div class="skin-option locked" data-skin="🐰" data-unlock="100000000000">🐰 (100000000000 Emoji)</div>
+        <div class="skin-option locked" data-skin="🌈💩" data-unlock="1000">🌈💩</div>
+        <div class="skin-option locked" data-skin="⚫💩" data-unlock="10000">⚫💩</div>
+        <div class="skin-option locked" data-skin="⚪💩" data-unlock="100000">⚪💩</div>
+        <div class="skin-option locked" data-skin="🏅💩" data-unlock="1000000">🏅💩</div>
+        <div class="skin-option locked" data-skin="🐶" data-unlock="10000000">🐶</div>
+        <div class="skin-option locked" data-skin="🐱" data-unlock="100000000">🐱</div>
+        <div class="skin-option locked" data-skin="🐭" data-unlock="1000000000">🐭</div>
+        <div class="skin-option locked" data-skin="🐹" data-unlock="10000000000">🐹</div>
+        <div class="skin-option locked" data-skin="🐰" data-unlock="100000000000">🐰</div>
     </div>
 
     <audio id="clickSound" src="https://www.myinstants.com/media/sounds/fart-01.mp3" preload="auto"></audio>
@@ -244,7 +244,7 @@
             skinOption.classList.add('skin-option');
             skinOption.innerText = skin;
             skinOption.addEventListener('click', () => {
-                if (emoji >= parseInt(skinOption.dataset.unlock || 0)) {
+                if (!skinOption.classList.contains('locked')) {
                     currentSkinIndex = index;
                     emojiButton.innerText = skins[currentSkinIndex];
                     saveGame();
