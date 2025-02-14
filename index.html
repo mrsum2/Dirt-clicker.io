@@ -99,6 +99,18 @@
             <div class="upgrade" id="upgrade13">Buy Pile Driver (Cost: 200000 Dirt)</div>
             <div class="upgrade" id="upgrade14">Buy Paving Machine (Cost: 500000 Dirt)</div>
             <div class="upgrade" id="upgrade15">Buy Tunnel Boring Machine (Cost: 1000000 Dirt)</div>
+            <div class="upgrade" id="upgrade16">Buy Loader (Cost: 2000000 Dirt)</div>
+            <div class="upgrade" id="upgrade17">Buy Skid Steer Loader (Cost: 5000000 Dirt)</div>
+            <div class="upgrade" id="upgrade18">Buy Track Loader (Cost: 10000000 Dirt)</div>
+            <div class="upgrade" id="upgrade19">Buy Wheel Tractor-Scraper (Cost: 20000000 Dirt)</div>
+            <div class="upgrade" id="upgrade20">Buy Trencher (Cost: 50000000 Dirt)</div>
+            <div class="upgrade" id="upgrade21">Buy Road Roller (Cost: 100000000 Dirt)</div>
+            <div class="upgrade" id="upgrade22">Buy Asphalt Paver (Cost: 200000000 Dirt)</div>
+            <div class="upgrade" id="upgrade23">Buy Cold Planer (Cost: 500000000 Dirt)</div>
+            <div class="upgrade" id="upgrade24">Buy Motor Grader (Cost: 1000000000 Dirt)</div>
+            <div class="upgrade" id="upgrade25">Buy Snowplow (Cost: 2000000000 Dirt)</div>
+            <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Dirt)</div>
+            <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Dirt)</div>
         </div>
         <div id="emoji-skins">
             <button id="skinButton">Change Skin</button>
@@ -111,8 +123,8 @@
         let dirt = 0;
         let dirtPerClick = 1;
         let autoClickerActive = false;
-        const upgradeCosts = [10, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000];
-        const upgradeIncreases = [1, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000];
+        const upgradeCosts = [10, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000, 50000000, 100000000, 200000000, 500000000, 1000000000, 2000000000, 5000000000, 10000000000];
+        const upgradeIncreases = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650];
         
         const dirtDisplay = document.getElementById('score');
         const dirtButton = document.getElementById('dirt');
@@ -158,7 +170,7 @@
             createPopup(`You gained ${dirtPerClick} Dirt!`, dirtButton);
         });
 
-        for (let i = 1; i <= 15; i++) {
+        for (let i = 1; i <= 27; i++) {
             document.getElementById(`upgrade${i}`).addEventListener('click', () => buyUpgrade(i));
         }
 
