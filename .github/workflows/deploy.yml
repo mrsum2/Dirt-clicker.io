@@ -1,4 +1,4 @@
-name: Deploy Dirt Clicker Game to GitHub Pages
+name: Deploy Emoji Clicker Game to GitHub Pages
 
 on:
   push:
