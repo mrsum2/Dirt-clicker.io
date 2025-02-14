@@ -40,8 +40,28 @@
             cursor: pointer;
             user-select: none; /* Prevents text highlighting on click */
         }
+        #skin-arrow {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none; /* Prevents text highlighting on click */
+            z-index: 1000;
+            font-size: 30px;
+        }
         #emoji-skins {
-            margin-top: 20px;
+            position: fixed;
+            left: -200px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s;
+            z-index: 999;
         }
         .skin-option {
             display: block;
@@ -112,12 +132,23 @@
             <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Dirt)</div>
             <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Dirt)</div>
         </div>
-        <div id="emoji-skins">
-            <button id="skinButton">Change Skin</button>
-        </div>
     </div>
 
-    <audio id="clickSound" src="https://www.soundjay.com/button/sounds/button-3.mp3" preload="auto"></audio>
+    <div id="skin-arrow">➡️</div>
+    <div id="emoji-skins">
+        <div class="skin-option">💩</div>
+        <div class="skin-option">🌈💩</div>
+        <div class="skin-option">⚫💩</div>
+        <div class="skin-option">⚪💩</div>
+        <div class="skin-option">🏅💩</div>
+        <div class="skin-option">🐶</div>
+        <div class="skin-option">🐱</div>
+        <div class="skin-option">🐭</div>
+        <div class="skin-option">🐹</div>
+        <div class="skin-option">🐰</div>
+    </div>
+
+    <audio id="clickSound" src="https://www.myinstants.com/media/sounds/fart-01.mp3" preload="auto"></audio>
 
     <script>
         let dirt = 0;
@@ -129,7 +160,8 @@
         const dirtDisplay = document.getElementById('score');
         const dirtButton = document.getElementById('dirt');
         const clickSound = document.getElementById('clickSound');
-        const skinButton = document.getElementById('skinButton');
+        const skinArrow = document.getElementById('skin-arrow');
+        const emojiSkins = document.getElementById('emoji-skins');
 
         const emojis = ['💩', '🌈💩', '⚫💩', '⚪💩', '🏅💩', '🐶', '🐱', '🐭', '🐹', '🐰'];
         let currentEmojiIndex = 0;
@@ -174,10 +206,25 @@
             document.getElementById(`upgrade${i}`).addEventListener('click', () => buyUpgrade(i));
         }
 
-        skinButton.addEventListener('click', () => {
-            currentEmojiIndex = (currentEmojiIndex + 1) % emojis.length;
-            dirtButton.innerText = emojis[currentEmojiIndex];
-            saveGame();
+        skinArrow.addEventListener('click', () => {
+            if (emojiSkins.style.left === '0px') {
+                emojiSkins.style.left = '-200px';
+            } else {
+                emojiSkins.style.left = '0px';
+            }
+        });
+
+        emojis.forEach((emoji, index) => {
+            const skinOption = document.createElement('div');
+            skinOption.classList.add('skin-option');
+            skinOption.textContent = emoji;
+            skinOption.addEventListener('click', () => {
+                currentEmojiIndex = index;
+                dirtButton.innerText = emojis[currentEmojiIndex];
+                saveGame();
+                emojiSkins.style.left = '-200px'; // Hide the skin selection GUI after selection
+            });
+            emojiSkins.appendChild(skinOption);
         });
 
         function addDirt(amount) {
@@ -239,3 +286,4 @@
     </script>
 </body>
 </html>
+``` ▋
