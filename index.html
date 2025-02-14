@@ -69,6 +69,10 @@
             cursor: pointer;
             user-select: none; /* Prevents text highlighting on click */
         }
+        .skin-option img {
+            width: 50px;
+            height: 50px;
+        }
         .popup {
             position: absolute;
             background-color: rgba(0, 0, 0, 0.7);
@@ -101,7 +105,7 @@
 <body>
     <div>
         <h1>Dirt Clicker Game</h1>
-        <div id="dirt">💩</div>
+        <div id="dirt"><img src="skins/poop.png" alt="Dirt" id="dirt-image"></div>
         <h2 id="score">Dirt Collected: 0</h2>
         <div id="upgrades">
             <div class="upgrade" id="upgrade1">Buy Shovel (Cost: 10 Dirt)</div>
@@ -136,16 +140,16 @@
 
     <div id="skin-arrow">➡️</div>
     <div id="emoji-skins">
-        <div class="skin-option">💩</div>
-        <div class="skin-option">🌈💩</div>
-        <div class="skin-option">⚫💩</div>
-        <div class="skin-option">⚪💩</div>
-        <div class="skin-option">🏅💩</div>
-        <div class="skin-option">🐶</div>
-        <div class="skin-option">🐱</div>
-        <div class="skin-option">🐭</div>
-        <div class="skin-option">🐹</div>
-        <div class="skin-option">🐰</div>
+        <div class="skin-option"><img src="skins/poop.png" alt="Poop"></div>
+        <div class="skin-option"><img src="skins/rainbow_poop.png" alt="Rainbow Poop"></div>
+        <div class="skin-option"><img src="skins/black_poop.png" alt="Black Poop"></div>
+        <div class="skin-option"><img src="skins/white_poop.png" alt="White Poop"></div>
+        <div class="skin-option"><img src="skins/gold_poop.png" alt="Gold Poop"></div>
+        <div class="skin-option"><img src="skins/dog.png" alt="Dog"></div>
+        <div class="skin-option"><img src="skins/cat.png" alt="Cat"></div>
+        <div class="skin-option"><img src="skins/mouse.png" alt="Mouse"></div>
+        <div class="skin-option"><img src="skins/hamster.png" alt="Hamster"></div>
+        <div class="skin-option"><img src="skins/rabbit.png" alt="Rabbit"></div>
     </div>
 
     <audio id="clickSound" src="https://www.myinstants.com/media/sounds/fart-01.mp3" preload="auto"></audio>
@@ -159,12 +163,24 @@
         
         const dirtDisplay = document.getElementById('score');
         const dirtButton = document.getElementById('dirt');
+        const dirtImage = document.getElementById('dirt-image');
         const clickSound = document.getElementById('clickSound');
         const skinArrow = document.getElementById('skin-arrow');
         const emojiSkins = document.getElementById('emoji-skins');
 
-        const emojis = ['💩', '🌈💩', '⚫💩', '⚪💩', '🏅💩', '🐶', '🐱', '🐭', '🐹', '🐰'];
-        let currentEmojiIndex = 0;
+        const skins = [
+            'skins/poop.png',
+            'skins/rainbow_poop.png',
+            'skins/black_poop.png',
+            'skins/white_poop.png',
+            'skins/gold_poop.png',
+            'skins/dog.png',
+            'skins/cat.png',
+            'skins/mouse.png',
+            'skins/hamster.png',
+            'skins/rabbit.png'
+        ];
+        let currentSkinIndex = 0;
 
         // Load game data from local storage
         function loadGame() {
@@ -173,6 +189,8 @@
                 dirt = savedData.dirt;
                 dirtPerClick = savedData.dirtPerClick;
                 autoClickerActive = savedData.autoClickerActive;
+                currentSkinIndex = savedData.currentSkinIndex || 0;
+                dirtImage.src = skins[currentSkinIndex];
                 if (autoClickerActive) {
                     activateAutoClicker();
                 }
@@ -185,7 +203,8 @@
             const gameData = {
                 dirt: dirt,
                 dirtPerClick: dirtPerClick,
-                autoClickerActive: autoClickerActive
+                autoClickerActive: autoClickerActive,
+                currentSkinIndex: currentSkinIndex
             };
             localStorage.setItem('dirtClickerGame', JSON.stringify(gameData));
         }
@@ -214,13 +233,16 @@
             }
         });
 
-        emojis.forEach((emoji, index) => {
+        skins.forEach((skin, index) => {
             const skinOption = document.createElement('div');
             skinOption.classList.add('skin-option');
-            skinOption.textContent = emoji;
+            const img = document.createElement('img');
+            img.src = skin;
+            img.alt = `Skin ${index + 1}`;
+            skinOption.appendChild(img);
             skinOption.addEventListener('click', () => {
-                currentEmojiIndex = index;
-                dirtButton.innerText = emojis[currentEmojiIndex];
+                currentSkinIndex = index;
+                dirtImage.src = skins[currentSkinIndex];
                 saveGame();
                 emojiSkins.style.left = '-200px'; // Hide the skin selection GUI after selection
             });
@@ -286,4 +308,3 @@
     </script>
 </body>
 </html>
-``` ▋
