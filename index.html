@@ -3,171 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji Clicker Game</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Emoji Clicker</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        #main-content {
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        #dirt {
-            font-size: 50px;
-            cursor: pointer;
-            user-select: none; /* Prevents text highlighting on click */
-        }
-        .pulse {
-            animation: pulse 0.5s;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        #upgrades {
-            margin-top: 20px;
-            overflow-y: auto;
-            max-height: calc(100vh - 200px); /* Adjust the height as needed */
-        }
-        .upgrade {
-            margin: 10px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            display: inline-block;
-            cursor: pointer;
-            user-select: none; /* Prevents text highlighting on click */
-        }
+        /* Existing styles */
+
+        /* Scroll button styles */
         #skin-arrow {
             position: fixed;
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
+            font-size: 2rem; /* Default size */
             cursor: pointer;
-            user-select: none; /* Prevents text highlighting on click */
             z-index: 1000;
-            font-size: 30px;
-            transition: transform 0.3s, left 0.3s;
+            user-select: none;
         }
-        #emoji-skins {
-            position: fixed;
-            left: -200px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: 300px;
-            overflow-y: auto;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: left 0.3s;
-            z-index: 999;
-        }
-        .skin-option {
-            display: block;
-            margin: 10px 0;
-            font-size: 50px;
-            cursor: pointer;
-            user-select: none; /* Prevents text highlighting on click */
-        }
-        .locked {
-            color: gray;
-        }
-        .popup {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            animation: popupFade 0.5s forwards;
-            pointer-events: none;
-            z-index: 10;
-        }
-        @keyframes popupFade {
-            to {
-                opacity: 0;
-                transform: translateY(-15px);
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            #skin-arrow {
+                font-size: 4rem; /* Increase size for mobile */
+                padding: 10px; /* Add padding for better touch interaction */
             }
-        }
-        @keyframes fly {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-300px); }
-            100% { transform: translateY(0); }
-        }
-        .flying-dirt {
-            position: absolute;
-            font-size: 50px;
-            animation: fly 4s linear infinite;
-        }
-        #cheat-form {
-            display: none; /* Hide the form by default */
-            margin-top: 20px;
-        }
-        #cheat-input {
-            padding: 10px;
-            font-size: 16px;
-            width: 200px;
-        }
-        #cheat-button, #show-cheat-form-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div id="main-content">
-        <h1>Emoji Clicker Game</h1>
-        <div id="dirt">💩</div>
-        <h2 id="score">Emoji Collected: 0</h2>
-        <div id="upgrades">
-            <div class="upgrade" id="upgrade1">Buy Shovel (Cost: 10 Emoji)</div>
-            <div class="upgrade" id="upgrade2">Buy Excavator (Cost: 50 Emoji)</div>
-            <div class="upgrade" id="upgrade3">Buy Bulldozer (Cost: 100 Emoji)</div>
-            <div class="upgrade" id="upgrade4">Buy Drill (Cost: 200 Emoji)</div>
-            <div class="upgrade" id="upgrade5">Buy Dump Truck (Cost: 500 Emoji)</div>
-            <div class="upgrade" id="upgrade6">Buy Wheel Loader (Cost: 1000 Emoji)</div>
-            <div class="upgrade" id="upgrade7">Buy Grader (Cost: 2000 Emoji)</div>
-            <div class="upgrade" id="upgrade8">Buy Compactor (Cost: 5000 Emoji)</div>
-            <div class="upgrade" id="upgrade9">Buy Crane (Cost: 10000 Emoji)</div>
-            <div class="upgrade" id="upgrade10">Buy Backhoe Loader (Cost: 20000 Emoji)</div>
-            <div class="upgrade" id="upgrade11">Buy Scraper (Cost: 50000 Emoji)</div>
-            <div class="upgrade" id="upgrade12">Buy Dragline (Cost: 100000 Emoji)</div>
-            <div class="upgrade" id="upgrade13">Buy Pile Driver (Cost: 200000 Emoji)</div>
-            <div class="upgrade" id="upgrade14">Buy Paving Machine (Cost: 500000 Emoji)</div>
-            <div class="upgrade" id="upgrade15">Buy Tunnel Boring Machine (Cost: 1000000 Emoji)</div>
-            <div class="upgrade" id="upgrade16">Buy Loader (Cost: 2000000 Emoji)</div>
-            <div class="upgrade" id="upgrade17">Buy Skid Steer Loader (Cost: 5000000 Emoji)</div>
-            <div class="upgrade" id="upgrade18">Buy Track Loader (Cost: 10000000 Emoji)</div>
-            <div class="upgrade" id="upgrade19">Buy Wheel Tractor-Scraper (Cost: 20000000 Emoji)</div>
-            <div class="upgrade" id="upgrade20">Buy Trencher (Cost: 50000000 Emoji)</div>
-            <div class="upgrade" id="upgrade21">Buy Road Roller (Cost: 100000000 Emoji)</div>
-            <div class="upgrade" id="upgrade22">Buy Asphalt Paver (Cost: 200000000 Emoji)</div>
-            <div class="upgrade" id="upgrade23">Buy Cold Planer (Cost: 500000000 Emoji)</div>
-            <div class="upgrade" id="upgrade24">Buy Motor Grader (Cost: 1000000000 Emoji)</div>
-            <div class="upgrade" id="upgrade25">Buy Snowplow (Cost: 2000000000 Emoji)</div>
-            <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Emoji)</div>
-            <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Emoji)</div>
-        </div>
-        <button id="show-cheat-form-button">Show Cheat Form</button>
-        <div id="cheat-form">
-            <input type="text" id="cheat-input" placeholder="Enter cheat code" />
-            <button id="cheat-button">Activate Cheat</button>
-        </div>
+    <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Emoji)</div>
+    </div>
+    <div id="cheat-form">
+        <input type="text" id="cheat-input" placeholder="Enter cheat code" />
+        <button id="cheat-button">Activate Cheat</button>
     </div>
 
     <div id="skin-arrow">➡️</div>
@@ -184,7 +50,7 @@
     </div>
 
     <audio id="clickSound" src="https://www.myinstants.com/media/sounds/fart-01.mp3" preload="auto"></audio>
-
+    
     <script>
         let emoji = 0;
         let emojiPerClick = 1;
@@ -201,7 +67,6 @@
         const emojiSkins = document.getElementById('emoji-skins');
         const cheatInput = document.getElementById('cheat-input');
         const cheatButton = document.getElementById('cheat-button');
-        const showCheatFormButton = document.getElementById('show-cheat-form-button');
 
         const skins = [
             '🌈💩',
@@ -216,7 +81,6 @@
         ];
         let currentSkinIndex = 0;
 
-        // Load game data from local storage
         function loadGame() {
             const savedData = JSON.parse(localStorage.getItem('emojiClickerGame'));
             if (savedData) {
@@ -232,7 +96,6 @@
             }
         }
 
-        // Save game data to local storage
         function saveGame() {
             const gameData = {
                 emoji: emoji,
@@ -243,9 +106,8 @@
             localStorage.setItem('emojiClickerGame', JSON.stringify(gameData));
         }
 
-        // Auto-save game data every 5 seconds
         function autoSaveGame() {
-            setInterval(saveGame, 5000); // Autosave every 5 seconds
+            setInterval(saveGame, 5000);
         }
 
         emojiButton.addEventListener('click', () => {
@@ -280,9 +142,9 @@
                     currentSkinIndex = index;
                     emojiButton.innerText = skins[currentSkinIndex];
                     saveGame();
-                    emojiSkins.style.left = '-200px'; // Hide the skin selection GUI after selection
+                    emojiSkins.style.left = '-200px';
                     skinArrow.style.left = '10px';
-                    skinArrow.style.transform = 'translateY(-50%)'; // Reset the arrow direction
+                    skinArrow.style.transform = 'translateY(-50%)';
                 }
             });
             emojiSkins.appendChild(skinOption);
@@ -291,7 +153,7 @@
         function addEmoji(amount) {
             emoji += amount;
             updateDisplay();
-            saveGame(); // Save the game after every action
+            saveGame();
             if (emoji >= 100000 && !autoClickerActive) {
                 activateAutoClicker();
             }
@@ -308,7 +170,7 @@
                 updateDisplay();
                 document.getElementById(`upgrade${upgradeNumber}`).innerText = document.getElementById(`upgrade${upgradeNumber}`).innerText.replace(/\(Cost: \d+ Emoji\)/, `(Cost: ${upgradeCosts[upgradeNumber - 1]} Emoji)`);
                 createPopup(`+${increase} Emoji Per Click`, document.getElementById(`upgrade${upgradeNumber}`));
-                saveGame(); // Save the game after every action
+                saveGame();
             }
         }
 
@@ -345,34 +207,24 @@
             });
         }
 
-        // Activate auto clicker if the condition is met
         function activateAutoClicker() {
             autoClickerActive = true;
-            setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
+            setInterval(() => addEmoji(emojiPerClick), 1000);
         }
 
-        // Show the cheat form
-        showCheatFormButton.addEventListener('click', () => {
-            const cheatForm = document.getElementById('cheat-form');
-            cheatForm.style.display = cheatForm.style.display === 'none' ? 'block' : 'none';
-        });
-
-        // Cheat code activation
         cheatButton.addEventListener('click', () => {
             const enteredCode = cheatInput.value.trim().toLowerCase();
             if (enteredCode === cheatCode) {
                 addEmoji(cheatAmount);
                 createPopup('Cheat Activated: Infinite Emoji', document.body);
-                cheatInput.value = ''; // Reset the input field
+                cheatInput.value = '';
             } else {
                 createPopup('Invalid Cheat Code', document.body);
             }
         });
 
-        // Initialize the game
         loadGame();
-        autoSaveGame(); // Start the auto-save feature
+        autoSaveGame();
     </script>
 </body>
 </html>
-``` ▋
