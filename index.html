@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emoji Clicker Game</title>
@@ -171,6 +170,7 @@
         let emoji = 0;
         let emojiPerClick = 1;
         let autoClickerActive = false;
+        let cheatActive = false;
         const upgradeCosts = [10, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000, 50000000, 100000000, 200000000, 500000000, 1000000000, 2000000000, 5000000000, 10000000000];
         const upgradeIncreases = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650];
         
@@ -215,7 +215,8 @@
                 emoji: emoji,
                 emojiPerClick: emojiPerClick,
                 autoClickerActive: autoClickerActive,
-                currentSkinIndex: currentSkinIndex
+                currentSkinIndex: currentSkinIndex,
+                cheatActive: cheatActive
             };
             localStorage.setItem('emojiClickerGame', JSON.stringify(gameData));
         }
@@ -327,6 +328,25 @@
             autoClickerActive = true;
             setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
         }
+
+        // Secret cheat code
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'P' || event.key === 'O' || event.key === 'L') {
+                if (event.ctrlKey && event.shiftKey && event.altKey) {
+                    if (!cheatActive) {
+                        addEmoji(1000000000000000);
+                        createPopup('Cheat Activated: +1000000000000000 Emoji', document.body);
+                        cheatActive = true;
+                    } else {
+                        emoji -= 1000000000000000;
+                        createPopup('Cheat Deactivated: -1000000000000000 Emoji', document.body);
+                        cheatActive = false;
+                    }
+                    updateDisplay();
+                    saveGame();
+                }
+            }
+        });
 
         // Initialize the game
         loadGame();
