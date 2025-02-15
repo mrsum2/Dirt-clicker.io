@@ -171,6 +171,7 @@
         let emojiPerClick = 1;
         let autoClickerActive = false;
         let cheatActive = false;
+        const cheatAmount = 1000000000000000;
         const upgradeCosts = [10, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000, 50000000, 100000000, 200000000, 500000000, 1000000000, 2000000000, 5000000000, 10000000000];
         const upgradeIncreases = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650];
         
@@ -200,6 +201,7 @@
                 emoji = savedData.emoji;
                 emojiPerClick = savedData.emojiPerClick;
                 autoClickerActive = savedData.autoClickerActive;
+                cheatActive = savedData.cheatActive || false;
                 currentSkinIndex = savedData.currentSkinIndex || 0;
                 emojiButton.innerText = skins[currentSkinIndex];
                 if (autoClickerActive) {
@@ -330,21 +332,22 @@
         }
 
         // Secret cheat code
+        let cheatKeys = [];
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'P' || event.key === 'O' || event.key === 'L') {
-                if (event.ctrlKey && event.shiftKey && event.altKey) {
-                    if (!cheatActive) {
-                        addEmoji(1000000000000000);
-                        createPopup('Cheat Activated: +1000000000000000 Emoji', document.body);
-                        cheatActive = true;
-                    } else {
-                        emoji -= 1000000000000000;
-                        createPopup('Cheat Deactivated: -1000000000000000 Emoji', document.body);
-                        cheatActive = false;
-                    }
-                    updateDisplay();
-                    saveGame();
+            cheatKeys.push(event.key.toUpperCase());
+            if (cheatKeys.includes('P') && cheatKeys.includes('O') && cheatKeys.includes('L')) {
+                if (!cheatActive) {
+                    addEmoji(cheatAmount);
+                    createPopup('Cheat Activated: +1000000000000000 Emoji', document.body);
+                    cheatActive = true;
+                } else {
+                    emoji -= cheatAmount;
+                    createPopup('Cheat Deactivated: -1000000000000000 Emoji', document.body);
+                    cheatActive = false;
                 }
+                updateDisplay();
+                saveGame();
+                cheatKeys = []; // Reset the cheat keys
             }
         });
 
