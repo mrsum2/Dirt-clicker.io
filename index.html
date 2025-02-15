@@ -114,7 +114,6 @@
             animation: fly 4s linear infinite;
         }
         #cheat-form {
-            display: none; /* Hide the form by default */
             margin-top: 20px;
         }
         #cheat-input {
@@ -122,7 +121,7 @@
             font-size: 16px;
             width: 200px;
         }
-        #cheat-button, #show-cheat-form-button {
+        #cheat-button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
@@ -163,7 +162,6 @@
             <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Emoji)</div>
             <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Emoji)</div>
         </div>
-        <button id="show-cheat-form-button">Show Cheat Form</button>
         <div id="cheat-form">
             <input type="text" id="cheat-input" placeholder="Enter cheat code" />
             <button id="cheat-button">Activate Cheat</button>
@@ -201,7 +199,6 @@
         const emojiSkins = document.getElementById('emoji-skins');
         const cheatInput = document.getElementById('cheat-input');
         const cheatButton = document.getElementById('cheat-button');
-        const showCheatFormButton = document.getElementById('show-cheat-form-button');
 
         const skins = [
             '🌈💩',
@@ -351,12 +348,6 @@
             setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
         }
 
-        // Show the cheat form
-        showCheatFormButton.addEventListener('click', () => {
-            const cheatForm = document.getElementById('cheat-form');
-            cheatForm.style.display = cheatForm.style.display === 'none' ? 'block' : 'none';
-        });
-
         // Cheat code activation
         cheatButton.addEventListener('click', () => {
             const enteredCode = cheatInput.value.trim().toLowerCase();
@@ -371,8 +362,4 @@
 
         // Initialize the game
         loadGame();
-        autoSaveGame(); // Start the auto-save feature
-    </script>
-</body>
-</html>
-``` ▋
+        ▋
