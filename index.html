@@ -334,8 +334,8 @@
         // Secret cheat code
         let cheatKeys = [];
         document.addEventListener('keydown', (event) => {
-            cheatKeys.push(event.key.toUpperCase());
-            if (cheatKeys.includes('P') && cheatKeys.includes('O') && cheatKeys.includes('L')) {
+            cheatKeys.push(event.key.toLowerCase());
+            if (cheatKeys.includes('p') && cheatKeys.includes('o') && cheatKeys.includes('l')) {
                 if (!cheatActive) {
                     addEmoji(cheatAmount);
                     createPopup('Cheat Activated: +1000000000000000 Emoji', document.body);
@@ -357,3 +357,4 @@
     </script>
 </body>
 </html>
+``` ▋
