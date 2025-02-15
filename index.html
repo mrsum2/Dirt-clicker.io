@@ -334,20 +334,24 @@
         // Secret cheat code
         let cheatKeys = [];
         document.addEventListener('keydown', (event) => {
-            cheatKeys.push(event.key.toLowerCase());
-            if (cheatKeys.includes('p') && cheatKeys.includes('o') && cheatKeys.includes('l')) {
-                if (!cheatActive) {
-                    addEmoji(cheatAmount);
-                    createPopup('Cheat Activated: +1000000000000000 Emoji', document.body);
-                    cheatActive = true;
-                } else {
-                    emoji -= cheatAmount;
-                    createPopup('Cheat Deactivated: -1000000000000000 Emoji', document.body);
-                    cheatActive = false;
+            if (['p', 'o', 'l'].includes(event.key.toLowerCase())) {
+                cheatKeys.push(event.key.toLowerCase());
+                if (cheatKeys.includes('p') && cheatKeys.includes('o') && cheatKeys.includes('l')) {
+                    if (!cheatActive) {
+                        addEmoji(cheatAmount);
+                        createPopup('Cheat Activated: +1000000000000000 Emoji', document.body);
+                        cheatActive = true;
+                    } else {
+                        emoji -= cheatAmount;
+                        createPopup('Cheat Deactivated: -1000000000000000 Emoji', document.body);
+                        cheatActive = false;
+                    }
+                    updateDisplay();
+                    saveGame();
+                    cheatKeys = []; // Reset the cheat keys
                 }
-                updateDisplay();
-                saveGame();
-                cheatKeys = []; // Reset the cheat keys
+            } else {
+                cheatKeys = []; // Reset if other key is pressed
             }
         });
 
@@ -357,4 +361,3 @@
     </script>
 </body>
 </html>
-``` ▋
