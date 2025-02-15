@@ -126,6 +126,12 @@
             font-size: 16px;
             cursor: pointer;
         }
+        @media (max-width: 768px) {
+            #skin-arrow {
+                font-size: 4rem; /* Increase size for mobile */
+                padding: 10px; /* Add padding for better touch interaction */
+            }
+        }
     </style>
 </head>
 <body>
@@ -362,4 +368,8 @@
 
         // Initialize the game
         loadGame();
-        ▋
+        autoSaveGame();
+    </script>
+</body>
+</html>
+``` ▋
