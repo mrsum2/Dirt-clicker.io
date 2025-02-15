@@ -113,6 +113,19 @@
             font-size: 50px;
             animation: fly 4s linear infinite;
         }
+        #cheat-form {
+            margin-top: 20px;
+        }
+        #cheat-input {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+        #cheat-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -149,6 +162,10 @@
             <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Emoji)</div>
             <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Emoji)</div>
         </div>
+        <div id="cheat-form">
+            <input type="text" id="cheat-input" placeholder="Enter cheat code" />
+            <button id="cheat-button">Activate Cheat</button>
+        </div>
     </div>
 
     <div id="skin-arrow">➡️</div>
@@ -170,7 +187,7 @@
         let emoji = 0;
         let emojiPerClick = 1;
         let autoClickerActive = false;
-        let cheatActive = false;
+        const cheatCode = "dirtisalpha";
         const cheatAmount = 1000000000000000;
         const upgradeCosts = [10, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000, 50000000, 100000000, 200000000, 500000000, 1000000000, 2000000000, 5000000000, 10000000000];
         const upgradeIncreases = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650];
@@ -180,6 +197,8 @@
         const clickSound = document.getElementById('clickSound');
         const skinArrow = document.getElementById('skin-arrow');
         const emojiSkins = document.getElementById('emoji-skins');
+        const cheatInput = document.getElementById('cheat-input');
+        const cheatButton = document.getElementById('cheat-button');
 
         const skins = [
             '🌈💩',
@@ -201,7 +220,6 @@
                 emoji = savedData.emoji;
                 emojiPerClick = savedData.emojiPerClick;
                 autoClickerActive = savedData.autoClickerActive;
-                cheatActive = savedData.cheatActive || false;
                 currentSkinIndex = savedData.currentSkinIndex || 0;
                 emojiButton.innerText = skins[currentSkinIndex];
                 if (autoClickerActive) {
@@ -217,8 +235,7 @@
                 emoji: emoji,
                 emojiPerClick: emojiPerClick,
                 autoClickerActive: autoClickerActive,
-                currentSkinIndex: currentSkinIndex,
-                cheatActive: cheatActive
+                currentSkinIndex: currentSkinIndex
             };
             localStorage.setItem('emojiClickerGame', JSON.stringify(gameData));
         }
@@ -331,33 +348,18 @@
             setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
         }
 
-        // Secret cheat code
-        let cheatKeys = [];
-        document.addEventListener('keydown', (event) => {
-            if (['p', 'o', 'l'].includes(event.key.toLowerCase())) {
-                cheatKeys.push(event.key.toLowerCase());
-                if (cheatKeys.includes('p') && cheatKeys.includes('o') && cheatKeys.includes('l')) {
-                    if (!cheatActive) {
-                        addEmoji(cheatAmount);
-                        createPopup('Cheat Activated: +1000000000000000 Emoji', document.body);
-                        cheatActive = true;
-                    } else {
-                        emoji -= cheatAmount;
-                        createPopup('Cheat Deactivated: -1000000000000000 Emoji', document.body);
-                        cheatActive = false;
-                    }
-                    updateDisplay();
-                    saveGame();
-                    cheatKeys = []; // Reset the cheat keys
-                }
+        // Cheat code activation
+        cheatButton.addEventListener('click', () => {
+            const enteredCode = cheatInput.value.trim().toLowerCase();
+            if (enteredCode === cheatCode) {
+                addEmoji(cheatAmount);
+                createPopup('Cheat Activated: Infinite Emoji', document.body);
+                cheatInput.value = ''; // Reset the input field
             } else {
-                cheatKeys = []; // Reset if other key is pressed
+                createPopup('Invalid Cheat Code', document.body);
             }
         });
 
         // Initialize the game
         loadGame();
-        autoSaveGame(); // Start the auto-save feature
-    </script>
-</body>
-</html>
+        ▋
