@@ -324,4 +324,12 @@
         // Activate auto clicker if the condition is met
         function activateAutoClicker() {
             autoClickerActive = true;
-            setInterval(() => addEmoji(emojiPerClick), ▋
+            setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
+        }
+
+        // Initialize the game
+        loadGame();
+        autoSaveGame(); // Start the auto-save feature
+    </script>
+</body>
+</html>
