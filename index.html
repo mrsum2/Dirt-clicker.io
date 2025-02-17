@@ -59,7 +59,12 @@
             font-size: 70px;
         }
         nav {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
         }
         nav a {
             margin: 0 10px;
@@ -80,13 +85,13 @@
         <h1>Emoji Clicker Game</h1>
         <div id="dirt">💩</div>
         <h2 id="score">Emoji Collected: 0</h2>
-        <nav>
-            <a href="upgrades.html">Upgrades</a>
-            <a href="stats.html">Stats</a>
-            <a href="leaderboard.html">Leaderboard</a>
-            <a href="settings.html">Settings</a>
-        </nav>
     </div>
+    <nav>
+        <a href="upgrades.html">Upgrades</a>
+        <a href="stats.html">Stats</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="settings.html">Settings</a>
+    </nav>
 
     <audio id="clickSound" src="https://www.myinstants.com/media/sounds/fart-01.mp3" preload="auto"></audio>
 
