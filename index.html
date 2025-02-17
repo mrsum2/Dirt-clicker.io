@@ -9,8 +9,9 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-image: url('https://example.com/cool-background.jpg'); /* Add a cool background image */
+            background-image: url('https://wallpaperaccess.com/full/2044405.jpg'); /* Cool background image */
             background-size: cover;
+            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -52,7 +53,7 @@
         .fly {
             animation: fly 2s forwards;
             position: absolute;
-            left: 50%;
+            right: 10%;
             top: 50%;
             transform: translate(-50%, -50%);
             font-size: 70px;
@@ -124,6 +125,15 @@
                 transform: translateY(-15px);
             }
         }
+        #autoclicker {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            display: inline-block;
+            cursor: pointer;
+            user-select: none; /* Prevents text highlighting on click */
+        }
     </style>
 </head>
 <body>
@@ -164,6 +174,7 @@
             <input type="text" id="cheat-input" placeholder="Enter cheat code" />
             <button id="cheat-button">Activate Cheat</button>
         </div>
+        <div id="autoclicker">Toggle Auto Clicker</div>
     </div>
 
     <div id="skin-arrow">➡️</div>
@@ -185,6 +196,7 @@
         let emoji = 0;
         let emojiPerClick = 1;
         let autoClickerActive = false;
+        let autoClickerInterval;
         const cheatCode = "dirtisalpha";
         const newCheatCode = "infinityandbeyond";
         const cheatAmount = 1000000000000000;
@@ -198,6 +210,7 @@
         const emojiSkins = document.getElementById('emoji-skins');
         const cheatInput = document.getElementById('cheat-input');
         const cheatButton = document.getElementById('cheat-button');
+        const autoClickerButton = document.getElementById('autoclicker');
 
         const skins = [
             '🌈💩',
@@ -354,9 +367,27 @@
 
         // Activate auto clicker if the condition is met
         function activateAutoClicker() {
+            autoClickerInterval = setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
             autoClickerActive = true;
-            setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
+            autoClickerButton.innerText = "Auto Clicker: ON";
         }
+
+        // Deactivate auto clicker
+        function deactivateAutoClicker() {
+            clearInterval(autoClickerInterval);
+            autoClickerActive = false;
+            autoClickerButton.innerText = "Auto Clicker: OFF";
+        }
+
+        // Toggle auto clicker
+        autoClickerButton.addEventListener('click', () => {
+            if (autoClickerActive) {
+                deactivateAutoClicker();
+            } else {
+                activateAutoClicker();
+            }
+            saveGame();
+        });
 
         // Cheat code activation
         cheatButton.addEventListener('click', () => {
@@ -372,6 +403,7 @@
                 cheatInput.value = ''; // Reset the input field
             } else {
                 createPopup('Invalid Cheat Code', document.body);
+                cheatInput.value = ''; // Reset the input field
             }
         });
 
