@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Clicker Leaderboard</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('https://wallpaperaccess.com/full/2044405.jpg'); /* Cool background image */
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #main-content {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent background to the main content */
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-content">
+        <h1>Leaderboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Emojis Collected</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard">
+                <!-- Leaderboard entries will be dynamically added here -->
+            </tbody>
+        </table>
+        <nav>
+            <a href="index.html">Clicking</a>
+            <a href="upgrades.html">Upgrades</a>
+            <a href="stats.html">Stats</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </div>
+
+    <script>
+        const leaderboardData = [
+            { rank: 1, player: 'Player1', emojis: 1000000 },
+            { rank: 2, player: 'Player2', emojis: 800000 },
+            { rank: 3, player: 'Player3', emojis: 600000 },
+            { rank: 4, player: 'Player4', emojis: 400000 },
+            { rank: 5, player: 'Player5', emojis: 200000 },
+        ];
+
+        function loadLeaderboard() {
+            const leaderboard = document.getElementById('leaderboard');
+            leaderboard.innerHTML = '';
+            leaderboardData.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${entry.rank}</td><td>${entry.player}</td><td>${entry.emojis}</td>`;
+                leaderboard.appendChild(row);
+            });
+        }
+
+        // Initialize leaderboard
+        loadLeaderboard();
+    </script>
+</body>
+</html>
