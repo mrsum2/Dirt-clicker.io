@@ -94,7 +94,12 @@
             cursor: pointer;
         }
         nav {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
         }
         nav a {
             margin: 0 10px;
@@ -129,13 +134,13 @@
             <input type="text" id="cheat-input" placeholder="Enter cheat code" />
             <button id="cheat-button">Activate Cheat</button>
         </div>
-        <nav>
-            <a href="index.html">Clicking</a>
-            <a href="upgrades.html">Upgrades</a>
-            <a href="stats.html">Stats</a>
-            <a href="leaderboard.html">Leaderboard</a>
-        </nav>
     </div>
+    <nav>
+        <a href="index.html">Clicking</a>
+        <a href="upgrades.html">Upgrades</a>
+        <a href="stats.html">Stats</a>
+        <a href="leaderboard.html">Leaderboard</a>
+    </nav>
 
     <script>
         let emoji = 0;
@@ -252,4 +257,3 @@
     </script>
 </body>
 </html>
-``` ▋
