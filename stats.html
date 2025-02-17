@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Clicker Stats</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('https://wallpaperaccess.com/full/2044405.jpg'); /* Cool background image */
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        #main-content {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent background to the main content */
+            border-radius: 10px;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-content">
+        <h1>Stats</h1>
+        <p id="total-emojis">Total Emojis Collected: 0</p>
+        <p id="total-clicks">Total Clicks: 0</p>
+        <nav>
+            <a href="index.html">Clicking</a>
+            <a href="upgrades.html">Upgrades</a>
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </div>
+
+    <script>
+        let totalEmojis = 0;
+        let totalClicks = 0;
+
+        // Load game data from local storage
+        function loadGame() {
+            const savedData = JSON.parse(localStorage.getItem('emojiClickerGame'));
+            if (savedData) {
+                totalEmojis = savedData.emoji;
+                totalClicks = savedData.totalClicks || 0;
+                updateStatsDisplay();
+            }
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('total-emojis').innerText = `Total Emojis Collected: ${totalEmojis}`;
+            document.getElementById('total-clicks').innerText = `Total Clicks: ${totalClicks}`;
+        }
+
+        // Initialize the stats
+        loadGame();
+    </script>
+</body>
+</html>
