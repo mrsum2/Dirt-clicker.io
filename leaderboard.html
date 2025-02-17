@@ -41,7 +41,12 @@
             background-color: #f0f0f0;
         }
         nav {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
         }
         nav a {
             margin: 0 10px;
@@ -72,13 +77,13 @@
                 <!-- Leaderboard entries will be dynamically added here -->
             </tbody>
         </table>
-        <nav>
-            <a href="index.html">Clicking</a>
-            <a href="upgrades.html">Upgrades</a>
-            <a href="stats.html">Stats</a>
-            <a href="settings.html">Settings</a>
-        </nav>
     </div>
+    <nav>
+        <a href="index.html">Clicking</a>
+        <a href="upgrades.html">Upgrades</a>
+        <a href="stats.html">Stats</a>
+        <a href="settings.html">Settings</a>
+    </nav>
 
     <script>
         const leaderboardData = [
