@@ -128,7 +128,32 @@
         <h2 id="score">Emoji Collected: 0</h2>
         <div id="upgrades">
             <div class="upgrade" id="upgrade1">Buy Shovel (Cost: 10 Emoji)</div>
-            <!-- More upgrades here -->
+            <div class="upgrade" id="upgrade2">Buy Excavator (Cost: 50 Emoji)</div>
+            <div class="upgrade" id="upgrade3">Buy Bulldozer (Cost: 100 Emoji)</div>
+            <div class="upgrade" id="upgrade4">Buy Drill (Cost: 200 Emoji)</div>
+            <div class="upgrade" id="upgrade5">Buy Dump Truck (Cost: 500 Emoji)</div>
+            <div class="upgrade" id="upgrade6">Buy Wheel Loader (Cost: 1000 Emoji)</div>
+            <div class="upgrade" id="upgrade7">Buy Grader (Cost: 2000 Emoji)</div>
+            <div class="upgrade" id="upgrade8">Buy Compactor (Cost: 5000 Emoji)</div>
+            <div class="upgrade" id="upgrade9">Buy Crane (Cost: 10000 Emoji)</div>
+            <div class="upgrade" id="upgrade10">Buy Backhoe Loader (Cost: 20000 Emoji)</div>
+            <div class="upgrade" id="upgrade11">Buy Scraper (Cost: 50000 Emoji)</div>
+            <div class="upgrade" id="upgrade12">Buy Dragline (Cost: 100000 Emoji)</div>
+            <div class="upgrade" id="upgrade13">Buy Pile Driver (Cost: 200000 Emoji)</div>
+            <div class="upgrade" id="upgrade14">Buy Paving Machine (Cost: 500000 Emoji)</div>
+            <div class="upgrade" id="upgrade15">Buy Tunnel Boring Machine (Cost: 1000000 Emoji)</div>
+            <div class="upgrade" id="upgrade16">Buy Loader (Cost: 2000000 Emoji)</div>
+            <div class="upgrade" id="upgrade17">Buy Skid Steer Loader (Cost: 5000000 Emoji)</div>
+            <div class="upgrade" id="upgrade18">Buy Track Loader (Cost: 10000000 Emoji)</div>
+            <div class="upgrade" id="upgrade19">Buy Wheel Tractor-Scraper (Cost: 20000000 Emoji)</div>
+            <div class="upgrade" id="upgrade20">Buy Trencher (Cost: 50000000 Emoji)</div>
+            <div class="upgrade" id="upgrade21">Buy Road Roller (Cost: 100000000 Emoji)</div>
+            <div class="upgrade" id="upgrade22">Buy Asphalt Paver (Cost: 200000000 Emoji)</div>
+            <div class="upgrade" id="upgrade23">Buy Cold Planer (Cost: 500000000 Emoji)</div>
+            <div class="upgrade" id="upgrade24">Buy Motor Grader (Cost: 1000000000 Emoji)</div>
+            <div class="upgrade" id="upgrade25">Buy Snowplow (Cost: 2000000000 Emoji)</div>
+            <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Emoji)</div>
+            <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Emoji)</div>
         </div>
         <div id="skin-arrow">▶</div>
         <div id="emoji-skins">
@@ -140,13 +165,14 @@
     <script>
         let emoji = 0;
         let currentSkinIndex = 0;
+        let autoClickerActive = false;
         const emojiButton = document.getElementById('dirt');
         const emojiDisplay = document.getElementById('score');
         const skinArrow = document.getElementById('skin-arrow');
         const emojiSkins = document.getElementById('emoji-skins');
         const cheatInput = document.getElementById('cheatInput');
         const cheatButton = document.getElementById('cheatButton');
-        const skins = ['💩', '😊', '😂', '😍', '😎'];  // Example skins
+        const skins = ['💩', '😊', '😂', '😍', '😎']; // Example skins
         const cheatCode = 'infinityandbeyond';
         
         emojiButton.addEventListener('click', () => {
@@ -232,7 +258,7 @@
         // Activate auto clicker if the condition is met
         function activateAutoClicker() {
             autoClickerActive = true;
-            setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
+            setInterval(() => addEmoji(1), 1000); // Adds emoji every second
         }
 
         function saveGame() {
