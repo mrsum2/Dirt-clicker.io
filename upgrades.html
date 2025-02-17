@@ -42,7 +42,12 @@
             user-select: none; /* Prevents text highlighting on click */
         }
         nav {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
         }
         nav a {
             margin: 0 10px;
@@ -90,13 +95,13 @@
             <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Emoji)</div>
             <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Emoji)</div>
         </div>
-        <nav>
-            <a href="index.html">Clicking</a>
-            <a href="stats.html">Stats</a>
-            <a href="leaderboard.html">Leaderboard</a>
-            <a href="settings.html">Settings</a>
-        </nav>
     </div>
+    <nav>
+        <a href="index.html">Clicking</a>
+        <a href="stats.html">Stats</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="settings.html">Settings</a>
+    </nav>
 
     <script>
         let emoji = 0;
