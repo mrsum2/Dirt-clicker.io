@@ -28,7 +28,12 @@
             border-radius: 10px;
         }
         nav {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
         }
         nav a {
             margin: 0 10px;
@@ -49,13 +54,13 @@
         <h1>Stats</h1>
         <p id="total-emojis">Total Emojis Collected: 0</p>
         <p id="total-clicks">Total Clicks: 0</p>
-        <nav>
-            <a href="index.html">Clicking</a>
-            <a href="upgrades.html">Upgrades</a>
-            <a href="leaderboard.html">Leaderboard</a>
-            <a href="settings.html">Settings</a>
-        </nav>
     </div>
+    <nav>
+        <a href="index.html">Clicking</a>
+        <a href="upgrades.html">Upgrades</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="settings.html">Settings</a>
+    </nav>
 
     <script>
         let totalEmojis = 0;
