@@ -9,7 +9,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-image: url('cool-background.jpg'); /* Add a cool background image */
+            background-image: url('https://example.com/cool-background.jpg'); /* Add a cool background image */
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -51,6 +51,10 @@
         }
         .fly {
             animation: fly 2s forwards;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
         #upgrades {
             margin-top: 20px;
@@ -155,28 +159,111 @@
             <div class="upgrade" id="upgrade26">Buy Bucket Wheel Excavator (Cost: 5000000000 Emoji)</div>
             <div class="upgrade" id="upgrade27">Buy Surface Miner (Cost: 10000000000 Emoji)</div>
         </div>
-        <div id="skin-arrow">▶</div>
-        <div id="emoji-skins">
-            <!-- Skin options will be dynamically added here -->
+        <div id="cheat-form">
+            <input type="text" id="cheat-input" placeholder="Enter cheat code" />
+            <button id="cheat-button">Activate Cheat</button>
         </div>
-        <input type="text" id="cheatInput" placeholder="Enter cheat code">
-        <button id="cheatButton">Activate Cheat</button>
     </div>
+
+    <div id="skin-arrow">➡️</div>
+    <div id="emoji-skins">
+        <div class="skin-option locked" data-skin="🌈💩" data-unlock="1000">🌈💩</div>
+        <div class="skin-option locked" data-skin="⚫💩" data-unlock="10000">⚫💩</div>
+        <div class="skin-option locked" data-skin="⚪💩" data-unlock="100000">⚪💩</div>
+        <div class="skin-option locked" data-skin="🏅💩" data-unlock="1000000">🏅💩</div>
+        <div class="skin-option locked" data-skin="🐶" data-unlock="10000000">🐶</div>
+        <div class="skin-option locked" data-skin="🐱" data-unlock="100000000">🐱</div>
+        <div class="skin-option locked" data-skin="🐭" data-unlock="1000000000">🐭</div>
+        <div class="skin-option locked" data-skin="🐹" data-unlock="10000000000">🐹</div>
+        <div class="skin-option locked" data-skin="🐰" data-unlock="100000000000">🐰</div>
+    </div>
+
+    <audio id="clickSound" src="https://www.myinstants.com/media/sounds/fart-01.mp3" preload="auto"></audio>
+
     <script>
         let emoji = 0;
-        let currentSkinIndex = 0;
+        let emojiPerClick = 1;
         let autoClickerActive = false;
-        const emojiButton = document.getElementById('dirt');
+        const cheatCode = "dirtisalpha";
+        const newCheatCode = "infinityandbeyond";
+        const cheatAmount = 1000000000000000;
+        const upgradeCosts = [10, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000, 50000000, 100000000, 200000000, 500000000, 1000000000, 2000000000, 5000000000, 10000000000];
+        const upgradeIncreases = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650];
+        
         const emojiDisplay = document.getElementById('score');
+        const emojiButton = document.getElementById('dirt');
+        const clickSound = document.getElementById('clickSound');
         const skinArrow = document.getElementById('skin-arrow');
         const emojiSkins = document.getElementById('emoji-skins');
-        const cheatInput = document.getElementById('cheatInput');
-        const cheatButton = document.getElementById('cheatButton');
-        const skins = ['💩', '😊', '😂', '😍', '😎']; // Example skins
-        const cheatCode = 'infinityandbeyond';
-        
+        const cheatInput = document.getElementById('cheat-input');
+        const cheatButton = document.getElementById('cheat-button');
+
+        const skins = [
+            '🌈💩',
+            '⚫💩',
+            '⚪💩',
+            '🏅💩',
+            '🐶',
+            '🐱',
+            '🐭',
+            '🐹',
+            '🐰'
+        ];
+        let currentSkinIndex = 0;
+
+        // Load game data from local storage
+        function loadGame() {
+            const savedData = JSON.parse(localStorage.getItem('emojiClickerGame'));
+            if (savedData) {
+                emoji = savedData.emoji;
+                emojiPerClick = savedData.emojiPerClick;
+                autoClickerActive = savedData.autoClickerActive;
+                currentSkinIndex = savedData.currentSkinIndex || 0;
+                emojiButton.innerText = skins[currentSkinIndex];
+                if (autoClickerActive) {
+                    activateAutoClicker();
+                }
+                updateDisplay();
+            }
+        }
+
+        // Save game data to local storage
+        function saveGame() {
+            const gameData = {
+                emoji: emoji,
+                emojiPerClick: emojiPerClick,
+                autoClickerActive: autoClickerActive,
+                currentSkinIndex: currentSkinIndex
+            };
+            localStorage.setItem('emojiClickerGame', JSON.stringify(gameData));
+        }
+
+        // Auto-save game data every 5 seconds
+        function autoSaveGame() {
+            setInterval(saveGame, 5000); // Autosave every 5 seconds
+        }
+
         emojiButton.addEventListener('click', () => {
-            addEmoji(1);
+            addEmoji(emojiPerClick);
+            clickSound.play();
+            triggerAnimation();
+            createPopup(`You gained ${emojiPerClick} Emoji!`, emojiButton);
+        });
+
+        for (let i = 1; i <= 27; i++) {
+            document.getElementById(`upgrade${i}`).addEventListener('click', () => buyUpgrade(i));
+        }
+
+        skinArrow.addEventListener('click', () => {
+            if (emojiSkins.style.left === '0px') {
+                emojiSkins.style.left = '-200px';
+                skinArrow.style.left = '10px';
+                skinArrow.style.transform = 'translateY(-50%)';
+            } else {
+                emojiSkins.style.left = '0px';
+                skinArrow.style.left = '210px';
+                skinArrow.style.transform = 'translateY(-50%) rotate(180deg)';
+            }
         });
 
         skins.forEach((skin, index) => {
@@ -207,8 +294,29 @@
             unlockSkins();
         }
 
+        function buyUpgrade(upgradeNumber) {
+            const cost = upgradeCosts[upgradeNumber - 1];
+            const increase = upgradeIncreases[upgradeNumber - 1];
+            if (emoji >= cost) {
+                emoji -= cost;
+                emojiPerClick += increase;
+                upgradeCosts[upgradeNumber - 1] *= 2;
+                updateDisplay();
+                document.getElementById(`upgrade${upgradeNumber}`).innerText = document.getElementById(`upgrade${upgradeNumber}`).innerText.replace(/\(Cost: \d+ Emoji\)/, `(Cost: ${upgradeCosts[upgradeNumber - 1]} Emoji)`);
+                createPopup(`+${increase} Emoji Per Click`, document.getElementById(`upgrade${upgradeNumber}`));
+                saveGame(); // Save the game after every action
+            }
+        }
+
         function updateDisplay() {
             emojiDisplay.innerText = `Emoji Collected: ${emoji}`;
+        }
+
+        function triggerAnimation() {
+            emojiButton.classList.add('pulse');
+            setTimeout(() => {
+                emojiButton.classList.remove('pulse');
+            }, 500);
         }
 
         function triggerSkinAnimation() {
@@ -220,18 +328,6 @@
                 skinElement.remove();
             }, 2000);
         }
-
-        cheatButton.addEventListener('click', () => {
-            const enteredCode = cheatInput.value.trim().toLowerCase();
-            if (enteredCode === cheatCode) {
-                emoji = Infinity;
-                updateDisplay();
-                createPopup('Cheat Activated: Infinite Emoji', document.body);
-                cheatInput.value = ''; // Reset the input field
-            } else {
-                createPopup('Invalid Cheat Code', document.body);
-            }
-        });
 
         function createPopup(text, element) {
             const popup = document.createElement('div');
@@ -258,20 +354,25 @@
         // Activate auto clicker if the condition is met
         function activateAutoClicker() {
             autoClickerActive = true;
-            setInterval(() => addEmoji(1), 1000); // Adds emoji every second
+            setInterval(() => addEmoji(emojiPerClick), 1000); // Adds emoji every second
         }
 
-        function saveGame() {
-            // Save game state to local storage or server
-        }
-
-        function loadGame() {
-            // Load game state from local storage or server
-        }
-
-        function autoSaveGame() {
-            setInterval(saveGame, 30000); // Auto-save game every 30 seconds
-        }
+        // Cheat code activation
+        cheatButton.addEventListener('click', () => {
+            const enteredCode = cheatInput.value.trim().toLowerCase();
+            if (enteredCode === cheatCode) {
+                addEmoji(cheatAmount);
+                createPopup('Cheat Activated: Infinite Emoji', document.body);
+                cheatInput.value = ''; // Reset the input field
+            } else if (enteredCode === newCheatCode) {
+                emoji = Infinity;
+                updateDisplay();
+                createPopup('Cheat Activated: Infinite Emoji', document.body);
+                cheatInput.value = ''; // Reset the input field
+            } else {
+                createPopup('Invalid Cheat Code', document.body);
+            }
+        });
 
         // Initialize the game
         loadGame();
