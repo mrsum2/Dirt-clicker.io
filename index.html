@@ -6,8 +6,9 @@
     <title>Emoji Clicker Game</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Press Start 2P', cursive;
             text-align: center;
             background-image: url('https://wallpaperaccess.com/full/2044405.jpg'); /* Cool background image */
             background-size: cover;
@@ -18,19 +19,25 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
         }
         #main-content {
             width: 100%;
             max-width: 600px;
             padding: 20px;
             box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent background to the main content */
+            background: rgba(0, 0, 0, 0.7); /* Add a semi-transparent background to the main content */
             border-radius: 10px;
         }
         #dirt {
             font-size: 50px;
             cursor: pointer;
             user-select: none; /* Prevents text highlighting on click */
+            transition: transform 0.2s;
+        }
+        #dirt:hover {
+            transform: scale(1.1);
         }
         .pulse {
             animation: pulse 0.5s;
@@ -69,14 +76,17 @@
         nav a {
             margin: 0 10px;
             padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
+            background-color: #ffcc00;
+            border: 2px solid #fff;
             color: #000;
             text-decoration: none;
             border-radius: 5px;
+            box-shadow: 2px 2px 5px #000;
+            transition: background-color 0.3s, transform 0.3s;
         }
         nav a:hover {
-            background-color: #f0f0f0;
+            background-color: #ffeb3b;
+            transform: translateY(-3px);
         }
     </style>
 </head>
